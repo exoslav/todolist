@@ -1,14 +1,19 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 ;
 import { StoreContext } from 'store';
+import { changePageTitle } from 'store/page';
+import { todoItemChecked } from 'store/todos';
 import { useSelectCategory } from 'hooks';
 import ListItem from 'components/ListItem';
 
 const CategoryDetailPage: React.FC = () => {
-    const { state } = useContext(StoreContext);
+    const { state, dispatch } = useContext(StoreContext);
     const category = useSelectCategory();
 
+    useEffect(() => changePageTitle(dispatch, { title: category?.name, active: true }), [category])
+
     const todos = state.todos.list.filter(i => i.type === category?.typeId);
+    const checkItem = (id: string) => todoItemChecked(dispatch, id);
 
     return (
         <div>
@@ -22,7 +27,9 @@ const CategoryDetailPage: React.FC = () => {
                                 key={i.id}
                                 id={i.id}
                                 title={i.title}
+                                done={i.done}
                                 categoryColor={categoryColor}
+                                onCheckItem={() => checkItem(i.id)}
                             />
                         )
                     })

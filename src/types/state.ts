@@ -1,19 +1,26 @@
-import { ExpressApi } from 'types/api';
+import { Api } from 'types/api';
 
 export declare namespace state {
-	export interface RootState {
+	interface RootState {
 		todos: TodosState;
 	}
 
-    export interface TodosState {
+    interface TodosState {
         loading: boolean;
-        list: ExpressApi.TodoItem[];
+        list: Api.TodoItem[];
         error: string;
     }
 
-    export interface CategoriesState {
+    interface CategoriesState {
         loading: boolean;
-        list: ExpressApi.CategoryItem[];
+        list: Api.CategoryItem[];
         error: string;
+    }
+
+    interface PageState {
+        title: {
+            text: string;
+            active: boolean;
+        };
     }
 }

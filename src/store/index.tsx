@@ -1,6 +1,7 @@
 import React, { useReducer, createContext } from 'react';
 import { initialStore as todosInitialStore, todosReducer } from 'store/todos';
 import { initialStore as categoriesInitialStore, categoriesReducer } from 'store/categories';
+import { initialStore as pageInitialStore, pageReducer } from 'store/page';
 
 const combineReducers = (slices) => (state, action) => {
     return (
@@ -14,12 +15,14 @@ const combineReducers = (slices) => (state, action) => {
 
 const reducers = combineReducers({
     todos: todosReducer,
-    categories: categoriesReducer
+    categories: categoriesReducer,
+    page: pageReducer
 });
 
 const initalStore = {
     todos: todosInitialStore,
-    categories: categoriesInitialStore
+    categories: categoriesInitialStore,
+    page: pageInitialStore
 };
 
 export const StoreContext = createContext({ state: initalStore, dispatch: () => {} } as any);

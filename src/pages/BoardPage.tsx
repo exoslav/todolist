@@ -1,12 +1,20 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import { StoreContext } from 'store';
+import { changePageTitle } from 'store/page';
+import { todoItemChecked } from 'store/todos';
 import ListItem from 'components/ListItem';
 import CategoryItem from 'components/CategoryItem';
 import H2 from 'components/semantic/H2';
 
+const pageTitle = 'Active tasks';
+
 const BoardPage: React.FC = () => {
-    const { state } = React.useContext(StoreContext);
+    const { state, dispatch } = useContext(StoreContext);
+
+    useEffect(() => changePageTitle(dispatch, { title: pageTitle, active: true }), []);
+
+    const checkItem = (id: string) => todoItemChecked(dispatch, id);
 
     return (
         <div>
@@ -19,14 +27,16 @@ const BoardPage: React.FC = () => {
                                 key={i.id}
                                 id={i.id}
                                 title={i.title}
+                                done={i.done}
                                 categoryColor={categoryColor}
+                                onCheckItem={() => checkItem(i.id)}
                             />
                         )
                     })
                 }
             </ul>
 
-            <H2 title="Lists" />
+            <H2>Lists</H2>
 
             <ul>
                 {

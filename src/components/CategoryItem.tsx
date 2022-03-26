@@ -8,7 +8,7 @@ import colors from 'styles/colors';
 interface CategoryItemProps {
     bgColor: string;
     title: string;
-    total?: number;
+    total: number;
 }
 
 const setFont = props => props.$useLightFont ? colors.base.white : colors.app.primaryBlack;

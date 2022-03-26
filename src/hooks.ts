@@ -2,9 +2,9 @@ import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { StoreContext } from 'store';
-import { ExpressApi } from 'types/api';
+import { Api } from 'types/api';
 
-export const useSelectCategory = (): ExpressApi.CategoryItem => {
+export const useSelectCategory = (): Api.CategoryItem => {
     const categoryName = useParams().categoryName || '';
     const { state } = useContext(StoreContext);
 

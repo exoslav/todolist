@@ -44,6 +44,14 @@ export const getTodoDetail = async (dispatch: any, itemId: string | undefined) =
     }
 }
 
+const TODO_ITEM_CHECKED = 'todos/TODO_ITEM_CHECKED';
+
+export const todoItemChecked = (dispatch: any, id: string) => {
+    if (!id) return;
+
+    dispatch({ type: TODO_ITEM_CHECKED, payload: id });
+}
+
 export const todosReducer = (state: state.TodosState, action: any): state.TodosState => {
     switch(action.type) {
         case TODO_LIST_FETCH_START:
@@ -67,6 +75,11 @@ export const todosReducer = (state: state.TodosState, action: any): state.TodosS
                 ...state,
                 error: action.payload,
                 loading: false
+            };
+        case TODO_ITEM_CHECKED:
+            return {
+                ...state,
+                list: state.list.map(i => i.id === action.payload ? { ...i, done: !i.done } : i)
             };
         default:
             return state;

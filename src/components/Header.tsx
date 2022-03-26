@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
-import { useSelectCategory } from 'hooks';
+import colors from 'styles/colors';
+import { StoreContext } from 'store';
+import { capitalizeFirstLetter } from 'utils/strings';
 import H1 from 'components/semantic/H1';
 import Arrow from 'components/Arrow';
 
-const StyledHeader = styled.div`
+const StyledHeader = styled.div<{ active: boolean }>`
     position: relative;
     display: flex;
     align-items: center;
@@ -16,20 +18,22 @@ const StyledHeader = styled.div`
     a {
         position: absolute;
         left: -32px;
+        top: 11px;
+    }
+
+    h1 {
+        color: ${props => props.active ? colors.app.primaryBlack : colors.app.primaryGray2}
     }
 `;
 
-
 const Header: React.FC = () => {
     const location = useLocation();
-    const category = useSelectCategory();
+    const { state } = useContext(StoreContext);
 
     const displayBackLink = !['/', '/board'].includes(location.pathname);
-    const title = location.pathname.includes('category')
-        ? category?.name : 'ToDo List';
 
     return (
-        <StyledHeader>
+        <StyledHeader active={state.page.title.active}>
             {
                 displayBackLink &&
                 <Link to="/board">
@@ -37,7 +41,7 @@ const Header: React.FC = () => {
                 </Link>
 
             }
-            <H1 title={title} />
+            <H1>{capitalizeFirstLetter(state.page.title.text)}</H1>
         </StyledHeader>
     )
 }

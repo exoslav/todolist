@@ -1,5 +1,6 @@
-export declare namespace ExpressApi {
+export declare namespace Api {
     interface TodoItem {
+        id: string;
         title: string;
         description: string;
         type: string;
@@ -8,6 +9,7 @@ export declare namespace ExpressApi {
     }
 
     interface CategoryItem {
+        id: string;
         name: string;
         color: string;
         typeId: string;

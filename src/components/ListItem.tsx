@@ -13,7 +13,7 @@ interface ListItemProps {
     title: string;
     categoryColor: string;
     done: boolean;
-    onCheckItem: (args: any) => void;
+    onCheckItem: () => void;
 }
 
 const StyledLeftBox = styled.div`

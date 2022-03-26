@@ -1,4 +1,4 @@
-import { state } from 'types/state';
+import * as state from 'types/state';
 
 export const initialStore = {
     title: {

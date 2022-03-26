@@ -8,7 +8,8 @@
         "build:dev": "webpack-dev-server --env dev --mode none",
         "build:prod": "webpack --env prod --mode production",
         "prebuild": "npm run clean",
-        "clean": "rimraf ./dist"
+        "clean": "rimraf ./dist",
+        "lint": "eslint \"**/*.{js,ts,tsx}\""
     },
     "author": "martin.nikl",
     "license": "MIT",

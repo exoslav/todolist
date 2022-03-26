@@ -27,7 +27,7 @@ const initalStore = {
 
 export const StoreContext = createContext({ state: initalStore, dispatch: () => {} } as any);
 
-export const StoreProvider = ({ children }: any) => {
+export const StoreProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducers, initalStore);
 
     return (

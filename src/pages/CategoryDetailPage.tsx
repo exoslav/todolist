@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react';
-;
+
 import { StoreContext } from 'store';
 import { changePageTitle } from 'store/page';
 import { todoItemChecked } from 'store/todos';

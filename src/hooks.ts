@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 
+import * as Api from 'types/api';
 import { StoreContext } from 'store';
-import { Api } from 'types/api';
 
 export const useSelectCategory = (): Api.CategoryItem => {
     const categoryName = useParams().categoryName || '';

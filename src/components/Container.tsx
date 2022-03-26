@@ -1,10 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Outlet } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+
 import colors from 'styles/colors';
 
-const StyledContainer = styled.div`
-    max-width: 475px;
+const StyledContainer = styled.div<{ wide: boolean }>`
+    max-width: ${props => props.wide ? '884px' : '475px'};
     margin: 50px auto 70px;
     background: ${colors.base.white};
     border-radius: 15px;
@@ -13,8 +15,11 @@ const StyledContainer = styled.div`
 `;
 
 const Container: React.FC = ({ children }) => {
+    const location = useLocation();
+    const wide = location.pathname === '/code';
+
     return (
-        <StyledContainer>
+        <StyledContainer wide={wide}>
             {children}
             <Outlet />
         </StyledContainer>

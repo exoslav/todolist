@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import colors from 'styles/colors';
 import { StoreContext } from 'store';
@@ -30,13 +29,15 @@ const Header: React.FC = () => {
     const location = useLocation();
     const { state } = useContext(StoreContext);
 
-    const displayBackLink = !['/', '/board'].includes(location.pathname);
+    const displayBackLink = location.pathname !== '/';
+    const route = location.pathname.split('/')[1];
+    const to = ['todo', 'category'].includes(route) ? '/board' : '/';
 
     return (
         <StyledHeader active={state.page.title.active}>
             {
                 displayBackLink &&
-                <Link to="/board">
+                <Link to={to}>
                     <Arrow />
                 </Link>
 

@@ -39,6 +39,15 @@ module.exports = env => {
                     getCustomTransformers: () => ({ before: [styledComponentsTransformer] })
                 }
 			},
+			{
+				test: /\.txt$/i,
+				use: {
+					loader: 'raw-loader',
+					options: {
+						esModule: false
+					}
+				}
+			  },
 			// {
 			// 	test: /\.(tsx|ts|js)x?$/,
 			// 	exclude: /node_modules/,

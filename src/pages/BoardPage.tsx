@@ -3,7 +3,7 @@ import React, { useEffect, useContext } from 'react';
 import { StoreContext } from 'store';
 import { changePageTitle } from 'store/page';
 import { todoItemChecked } from 'store/todos';
-import ListItem from 'components/ListItem';
+import Item from 'components/Item';
 import CategoryItem from 'components/CategoryItem';
 import H2 from 'components/semantic/H2';
 
@@ -23,9 +23,9 @@ const BoardPage: React.FC = () => {
                     state.todos.list.map(i => {
                         const categoryColor = state.categories.list.find(categoryItem => i.type === categoryItem.typeId)?.color;
                         return (
-                            <ListItem
+                            <Item
                                 key={i.id}
-                                id={i.id}
+                                to={`/todo/${i.id}`}
                                 title={i.title}
                                 done={i.done}
                                 categoryColor={categoryColor}

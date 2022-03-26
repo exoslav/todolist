@@ -8,12 +8,12 @@ import { capitalizeFirstLetter } from 'utils/strings';
 import Circle, { StyledCircle } from 'components/Circle';
 import CheckboxCircle from 'components/CheckboxCircle';
 
-interface ListItemProps {
-    id: string;
+interface ItemProps {
     title: string;
-    categoryColor: string;
     done: boolean;
-    onCheckItem: () => void;
+    to?: string;
+    categoryColor?: string;
+    onCheckItem?: () => void;
 }
 
 const StyledLeftBox = styled.div`
@@ -25,7 +25,7 @@ const StyledLeftBox = styled.div`
     align-self: center;
 `;
 
-const StyledListItem = styled.li<{ done: boolean }>`
+const StyledItem = styled.li<{ done: boolean }>`
     position: relative;
     display: flex;
     justify-content: start;
@@ -36,7 +36,7 @@ const StyledListItem = styled.li<{ done: boolean }>`
         width: 100%;
         padding: 19px 42px 19px 0;
         border-bottom: 1px solid ${rgba(colors.app.primaryBlack, 0.1)};
-        color: ${props => !props.done ? colors.app.primaryBlack : colors.app.primaryGray2};
+        color: ${props => props.done ? colors.app.primaryGray2 : colors.app.primaryBlack};
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -57,18 +57,24 @@ const StyledListItem = styled.li<{ done: boolean }>`
     }
 `;
 
-const ListItem: React.FC<ListItemProps> = ({ id, title, categoryColor, onCheckItem, done }) => (
-    <StyledListItem done={done}>
-        <StyledLeftBox>
-            <CheckboxCircle onClick={onCheckItem} />
-        </StyledLeftBox>
+const Item: React.FC<ItemProps> = ({ to, title, categoryColor, onCheckItem, done }) => (
+    <StyledItem done={done}>
+        {
+            onCheckItem &&
+            <StyledLeftBox>
+                <CheckboxCircle onClick={onCheckItem} finished={done} />
+            </StyledLeftBox>
+        }
 
-        <Link to={`/todo/${id}`}>
-            {capitalizeFirstLetter(title)}
-            <Circle color={categoryColor} />
-        </Link>
+        {
+            to &&
+            <Link to={to}>
+                {capitalizeFirstLetter(title)}
+                {categoryColor && <Circle color={categoryColor} />}
+            </Link>
+        }
 
-    </StyledListItem>
+    </StyledItem>
 )
 
-export default memo(ListItem);
+export default memo(Item);

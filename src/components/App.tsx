@@ -2,15 +2,11 @@ import React from 'react';
 import {
     BrowserRouter,
     Routes,
-    Route,
-    Navigate
+    Route
 } from 'react-router-dom';
 import { Reset } from 'styled-reset';
 
-import BoardPage from 'pages/BoardPage';
-import TodoDetailPage from 'pages/TodoDetailPage';
-import CategoryDetailPage from 'pages/CategoryDetailPage';
-import NotFoundPage from 'pages/NotFoundPage';
+import * as pages from 'pages';
 import { StoreProvider } from 'store';
 import GlobalStyles from 'styles/Globals';
 import Root from 'components/Root';
@@ -25,12 +21,13 @@ const App: React.FC = () => {
 
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Navigate to="/board" replace />} />
                     <Route path="/" element={<Root />}>
-                        <Route path="board" element={<BoardPage />} />
-                        <Route path="todo/:itemId" element={<TodoDetailPage />} />
-                        <Route path="category/:categoryName" element={<CategoryDetailPage />} />
-                        <Route path="*" element={<NotFoundPage />} />
+                        <Route index element={<pages.WelcomePage />} />
+                        <Route path="board" element={<pages.BoardPage />} />
+                        <Route path="todo/:itemId" element={<pages.TodoDetailPage />} />
+                        <Route path="category/:categoryName" element={<pages.CategoryDetailPage />} />
+                        <Route path="code" element={<pages.CodePage />} />
+                        <Route path="*" element={<pages.NotFoundPage />} />
                     </Route>
                 </Routes>
             </BrowserRouter>

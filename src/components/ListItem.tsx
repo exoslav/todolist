@@ -20,6 +20,8 @@ const StyledLeftBox = styled.div`
     position: absolute;
     top: 17px;
     left: -40px;
+    height: 24px;
+    display: flex;
     align-self: center;
 `;
 
@@ -40,7 +42,9 @@ const StyledListItem = styled.li<{ done: boolean }>`
         text-overflow: ellipsis;
 
         &:hover {
+            padding-bottom: 18px;
             border-color: ${colors.app.primaryBlue};
+            border-width: 2px;
         }
     }
 

@@ -1,5 +1,7 @@
+import React from 'react';
+
 import * as state from 'types/state';
-import { getCategories as fetchCategories } from 'service/domain/categories';
+import { getCategories as fetchCategories } from 'service/routes/categories';
 
 export const initialStore = {
     list: [],
@@ -11,19 +13,18 @@ const CATEGORIES_FETCH_START = 'categories/CATEGORIES_LIST_FETCH_START';
 const CATEGORIES_FETCH = 'categories/CATEGORIES_LIST_FETCH';
 const CATEOGRIES_FETCH_ERROR = 'categories/CATEGORIES_LIST_FETCH_ERROR';
 
-export const getCategories = async (dispatch: any) => {
+export const getCategories = async (dispatch: React.Dispatch<any>) => {
     dispatch({ type: CATEGORIES_FETCH_START });
 
     try {
-        const res = await fetchCategories();
-        const data = await res.json();
+        const data = await fetchCategories();
         dispatch({ type: CATEGORIES_FETCH, payload: data });
     } catch (err) {
         dispatch({ type: CATEOGRIES_FETCH_ERROR, payload: err });
     }
 }
 
-export const categoriesReducer = (state: state.CategoriesState, action: any): state.CategoriesState => {
+export const categoriesReducer = (state: state.CategoriesState, action: state.action): state.CategoriesState => {
     switch(action.type) {
         case CATEGORIES_FETCH_START:
             return {
@@ -34,7 +35,8 @@ export const categoriesReducer = (state: state.CategoriesState, action: any): st
             return {
                 ...state,
                 list: action.payload,
-                loading: false
+                loading: false,
+                error: ''
             };
         case CATEOGRIES_FETCH_ERROR:
             return {

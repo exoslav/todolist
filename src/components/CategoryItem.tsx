@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { darken } from 'polished';
 
@@ -42,25 +42,30 @@ const StyledCategoryItem = styled(Link)<{ $bgColor: string; $useLightFont: boole
 `;
 
 const CategoryItem: React.FC<CategoryItemProps> = ({ title, bgColor, total }) => {
-    const label = total === 1 ? 'task' : 'tasks';
-    const useLightFont = [
-        colors.app.primaryGreen,
-        colors.app.primaryRed,
-        colors.app.primaryPurple,
-        colors.app.primaryBlue,
-        colors.app.primaryBlack
-    ].includes(bgColor);
+    return useMemo(() => {
+        console.log('render CategoryItem.tsx');
 
-    return (
-        <StyledCategoryItem
-            to={`/category/${title.toLowerCase()}`}
-            $bgColor={bgColor}
-            $useLightFont={useLightFont}
-        >
-            <p>{title}</p>
-            {total && <span>{total} {label}</span>}
-        </StyledCategoryItem>
-    )
+        const label = total === 1 ? 'task' : 'tasks';
+        const useLightFont = [
+            colors.app.primaryGreen,
+            colors.app.primaryRed,
+            colors.app.primaryPurple,
+            colors.app.primaryBlue,
+            colors.app.primaryBlack
+        ].includes(bgColor);
+
+        return (
+            <StyledCategoryItem
+                to={`/category/${title.toLowerCase()}`}
+                $bgColor={bgColor}
+                $useLightFont={useLightFont}
+            >
+                <p>{title}</p>
+                {total && <span>{total} {label}</span>}
+            </StyledCategoryItem>
+        )
+    }, [title, bgColor, total]);
+
 }
 
-export default memo(CategoryItem);
+export default CategoryItem;

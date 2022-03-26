@@ -1,8 +1,9 @@
+import React from 'react';
+
 import * as state from 'types/state';
 import {
-    getTodoList as fetchTodoList,
-    getTodoDetail as fetchTodoDetail
-} from 'service/domain/list';
+    getTodoList as fetchTodoList
+} from 'service/routes/list';
 
 export const initialStore = {
     list: [],
@@ -14,63 +15,41 @@ const TODO_LIST_FETCH_START = 'todos/TODO_LIST_FETCH_START';
 const TODO_LIST_FETCH = 'todos/TODO_LIST_FETCH';
 const TODO_LIST_FETCH_ERROR = 'todos/TODO_LIST_FETCH_ERROR';
 
-export const getTodoList = async (dispatch: any) => {
+export const getTodoList = async (dispatch: React.Dispatch<any>) => {
     dispatch({ type: TODO_LIST_FETCH_START });
 
     try {
-        const res = await fetchTodoList();
-        const data = await res.json();
+        const data = await fetchTodoList();
         dispatch({ type: TODO_LIST_FETCH, payload: data });
     } catch (err) {
+        console.log('Error')
         dispatch({ type: TODO_LIST_FETCH_ERROR, payload: err });
-    }
-}
-
-const TODO_DETAIL_FETCH_START = 'todos/TODO_DETAIL_FETCH_START';
-const TODO_DETAIL_FETCH = 'todos/TODO_DETAIL_FETCH';
-const TODO_DETAIL_FETCH_ERROR = 'todos/TODO_DETAIL_FETCH_ERROR';
-
-export const getTodoDetail = async (dispatch: any, itemId: string | undefined) => {
-    if (!itemId) return;
-
-    dispatch({ type: TODO_DETAIL_FETCH_START });
-
-    try {
-        const res = await fetchTodoDetail(itemId);
-        const data = await res.json();
-        dispatch({ type: TODO_DETAIL_FETCH, payload: data });
-    } catch (err) {
-        dispatch({ type: TODO_DETAIL_FETCH_ERROR, payload: err });
     }
 }
 
 const TODO_ITEM_CHECKED = 'todos/TODO_ITEM_CHECKED';
 
-export const todoItemChecked = (dispatch: any, id: string) => {
+export const todoItemChecked = (dispatch: React.Dispatch<any>, id: string) => {
     if (!id) return;
 
     dispatch({ type: TODO_ITEM_CHECKED, payload: id });
 }
 
-export const todosReducer = (state: state.TodosState, action: any): state.TodosState => {
+export const todosReducer = (state: state.TodosState, action: state.action): state.TodosState => {
     switch(action.type) {
         case TODO_LIST_FETCH_START:
-        case TODO_DETAIL_FETCH_START:
             return {
                 ...state,
                 loading: true
             };
         case TODO_LIST_FETCH:
-        case TODO_DETAIL_FETCH:
             return {
                 ...state,
-                list: action.type === TODO_LIST_FETCH
-                    ? [...action.payload]
-                    : [action.payload],
-                loading: false
+                list: [...action.payload],
+                loading: false,
+                error: ''
             };
         case TODO_LIST_FETCH_ERROR:
-        case TODO_DETAIL_FETCH_ERROR:
             return {
                 ...state,
                 error: action.payload,

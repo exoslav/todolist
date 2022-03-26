@@ -22,6 +22,10 @@ const GlobalStyles = createGlobalStyle`
     button {
         font-family: 'Nunito', sans-serif;
     }
+
+    b {
+        font-weight: 700;
+    }
 `;
 
 export default GlobalStyles;

@@ -2,7 +2,7 @@ import WelcomePage from 'pages/WelcomePage';
 import BoardPage from 'pages/BoardPage';
 import TodoDetailPage from 'pages/TodoDetailPage';
 import CategoryDetailPage from 'pages/CategoryDetailPage';
-import CodePage from 'pages/CodePage';
+import HomeworkPage from 'pages/HomeworkPage';
 import NotFoundPage from 'pages/NotFoundPage';
 
 export {
@@ -10,6 +10,7 @@ export {
     BoardPage,
     TodoDetailPage,
     CategoryDetailPage,
-    CodePage,
+    HomeworkPage,
     NotFoundPage
 }
+

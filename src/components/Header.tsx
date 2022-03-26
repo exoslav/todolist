@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import styled from 'styled-components';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import colors from 'styles/colors';
 import { StoreContext } from 'store';
@@ -27,24 +27,28 @@ const StyledHeader = styled.div<{ active: boolean }>`
 
 const Header: React.FC = () => {
     const location = useLocation();
-    const { state } = useContext(StoreContext);
+    const { state: { page: { title }} } = useContext(StoreContext);
 
-    const displayBackLink = location.pathname !== '/';
-    const route = location.pathname.split('/')[1];
-    const to = ['todo', 'category'].includes(route) ? '/board' : '/';
+    return useMemo(() => {
+        console.log('render Header.tsx');
 
-    return (
-        <StyledHeader active={state.page.title.active}>
-            {
-                displayBackLink &&
-                <Link to={to}>
-                    <Arrow />
-                </Link>
+        const displayBackLink = location.pathname !== '/';
+        const route = location.pathname.split('/')[1];
+        const to = ['todo', 'category'].includes(route) ? '/board' : '/';
 
-            }
-            <H1>{capitalizeFirstLetter(state.page.title.text)}</H1>
-        </StyledHeader>
-    )
+        return (
+            <StyledHeader active={title.active}>
+                {
+                    displayBackLink &&
+                    <Link to={to}>
+                        <Arrow />
+                    </Link>
+
+                }
+                <H1>{capitalizeFirstLetter(title.text)}</H1>
+            </StyledHeader>
+        )
+    }, [title.text, title.active, location.pathname])
 }
 
 export default Header;

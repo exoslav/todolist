@@ -15,7 +15,7 @@ const ProgressBar: React.FC = () => {
         shadowBlur: 2
     });
 
-    return state.todos.loading && <TopBarProgress />;
+    return state.todos.loading ? <TopBarProgress /> : null;
 };
 
 export default ProgressBar;

@@ -19,7 +19,7 @@ const pageTitle = 'Homework';
 const CodePage = () => {
     const { dispatch } = useContext(StoreContext);
 
-    useEffect(() => changePageTitle(dispatch, { title: pageTitle, active: true }), []);
+    useEffect(() => changePageTitle(dispatch, { text: pageTitle, active: true }), []);
 
     return (
         <div>

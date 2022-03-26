@@ -11,9 +11,10 @@ import CheckboxCircle from 'components/CheckboxCircle';
 interface ItemProps {
     title: string;
     done: boolean;
+    id?: string;
     to?: string;
     categoryColor?: string;
-    onCheckItem?: () => void;
+    onCheckItem?: (id: string) => void;
 }
 
 const StyledLeftBox = styled.div`
@@ -57,24 +58,28 @@ const StyledItem = styled.li<{ done: boolean }>`
     }
 `;
 
-const Item: React.FC<ItemProps> = ({ to, title, categoryColor, onCheckItem, done }) => (
-    <StyledItem done={done}>
-        {
-            onCheckItem &&
-            <StyledLeftBox>
-                <CheckboxCircle onClick={onCheckItem} finished={done} />
-            </StyledLeftBox>
-        }
+const Item: React.FC<ItemProps> = memo(
+    ({ id = '', to, done, title, categoryColor, onCheckItem }) => (
+        <StyledItem done={done}>
+            {
+                onCheckItem &&
+                <StyledLeftBox>
+                    <CheckboxCircle onClick={() => onCheckItem(id)} finished={done} />
+                </StyledLeftBox>
+            }
 
-        {
-            to &&
-            <Link to={to}>
-                {capitalizeFirstLetter(title)}
-                {categoryColor && <Circle color={categoryColor} />}
-            </Link>
-        }
+            {console.log('render Item.tsx')}
 
-    </StyledItem>
+            {
+                to &&
+                <Link to={to}>
+                    {capitalizeFirstLetter(title)}
+                    {categoryColor && <Circle color={categoryColor} />}
+                </Link>
+            }
+
+        </StyledItem>
+    )
 )
 
-export default memo(Item);
+export default Item;

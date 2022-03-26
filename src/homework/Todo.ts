@@ -1,29 +1,32 @@
 export const TodoCode = `
-import React from "react";
+import React, { useMemo } from "react";
 
-class Todo extends React.Component<any> {
-	shouldComponentUpdate(prevProps: any) {
-	if(this.props != prevProps) {
-		return true;
-	}
-		return false;
-	}
-
-	handleOnClick() {
-		window.location.href = '/detail'
-	}
-
-	render() {
-
-	return (
-		<div>
-			<div onClick={this.handleOnClick}>
-			{this.props.todo.title}
-			</div>
-		</div>
-	);
-	}
+// 1. PureComonent
+// PureComponent does its own check if props where changed (shallow equal check). We dont need to implement "shouldComponentUpdate" lifecycle in that case.
+export class PureComponentTodo extends React.PureComponent<{ title: string;}> {
+    // todo item is <li> now
+    // we dont need click event "handleOnClick" at all, we will use <a> instead
+    render() {
+        return (
+            <li>
+                <a href="/detail">
+                    {this.props.title}
+                </a>
+            </li>
+        );
+    }
 }
 
-export default Todo;
-`
+// 2. Functional component with useMemo
+export const Todo: React.FC<{ title: string;}> = ({ title }) => {
+    return useMemo(() => {
+        return (
+            <li>
+                <a href="/detail">
+                    {title}
+                </a>
+            </li>
+        );
+    }, [title]);
+}
+`;

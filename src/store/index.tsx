@@ -1,4 +1,6 @@
 import React, { useReducer, createContext } from 'react';
+
+import * as state from 'types/state';
 import { initialStore as todosInitialStore, todosReducer } from 'store/todos';
 import { initialStore as categoriesInitialStore, categoriesReducer } from 'store/categories';
 import { initialStore as pageInitialStore, pageReducer } from 'store/page';
@@ -25,7 +27,9 @@ const initalStore = {
     page: pageInitialStore
 };
 
-export const StoreContext = createContext({ state: initalStore, dispatch: () => {} } as any);
+export const StoreContext = createContext(
+    { state: initalStore, dispatch: () => {} } as { state: state.RootState; dispatch: React.Dispatch<any>}
+);
 
 export const StoreProvider = ({ children }) => {
     const [state, dispatch] = useReducer(reducers, initalStore);

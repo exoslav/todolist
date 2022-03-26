@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from 'react';
+import React, { useEffect, useContext, useCallback } from 'react';
 
 import { StoreContext } from 'store';
 import { changePageTitle } from 'store/page';
@@ -12,9 +12,9 @@ const pageTitle = 'Active tasks';
 const BoardPage: React.FC = () => {
     const { state, dispatch } = useContext(StoreContext);
 
-    useEffect(() => changePageTitle(dispatch, { title: pageTitle, active: true }), []);
+    useEffect(() => changePageTitle(dispatch, { text: pageTitle, active: true }), []);
 
-    const checkItem = (id: string) => todoItemChecked(dispatch, id);
+    const checkItem = useCallback((id: string) => todoItemChecked(dispatch, id), []);
 
     return (
         <div>
@@ -22,14 +22,16 @@ const BoardPage: React.FC = () => {
                 {
                     state.todos.list.map(i => {
                         const categoryColor = state.categories.list.find(categoryItem => i.type === categoryItem.typeId)?.color;
+
                         return (
                             <Item
                                 key={i.id}
+                                id={i.id}
                                 to={`/todo/${i.id}`}
                                 title={i.title}
                                 done={i.done}
                                 categoryColor={categoryColor}
-                                onCheckItem={() => checkItem(i.id)}
+                                onCheckItem={checkItem}
                             />
                         )
                     })

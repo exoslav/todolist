@@ -4,8 +4,9 @@ import styled from 'styled-components';
 import colors from 'styles/colors';
 
 export const StyledParagraph = styled.p`
+    margin-bottom: 13px;
     font-size: 18px;
-    line-height: 21px;
+    line-height: 26px;
     color: ${colors.app.primaryBlack}
 `;
 

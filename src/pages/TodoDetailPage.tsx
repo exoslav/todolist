@@ -9,7 +9,7 @@ import H2 from 'components/semantic/H2';
 import CategoryItem from 'components/CategoryItem';
 import { StyledParagraph } from 'components/semantic/Paragraph';
 
-const StyledDesccription = styled(StyledParagraph)<{ active: boolean }>`
+const StyledDescription = styled(StyledParagraph)<{ active: boolean }>`
     margin-bottom: 35px;
     padding: 19px 0;
     color: ${props => props.active ? colors.app.primaryBlack : colors.app.primaryGray2}
@@ -20,18 +20,18 @@ const TodoDetailPage: React.FC = () => {
     const { state, dispatch } = useContext(StoreContext);
 
     const item =  state.todos.list?.find(i => i.id === params.itemId);
-    const title = item?.title;
+    const title: string = item?.title || '';
     const description = item?.description;
     const category = state.categories.list.find(category => category.typeId === item?.type);
     const total = state.todos.list.filter(todo => todo.type === category?.typeId).length;
 
-    useEffect(() => changePageTitle(dispatch, { title, active: !item?.done }), [item]);
+    useEffect(() => changePageTitle(dispatch, { text: title, active: !item?.done }), [item]);
 
     return (
         <div>
-            <StyledDesccription active={!item?.done}>
+            <StyledDescription active={!item?.done}>
                 {description}
-            </StyledDesccription>
+            </StyledDescription>
 
             <H2>Category</H2>
 

@@ -26,7 +26,7 @@ const App: React.FC = () => {
                         <Route path="board" element={<pages.BoardPage />} />
                         <Route path="todo/:itemId" element={<pages.TodoDetailPage />} />
                         <Route path="category/:categoryName" element={<pages.CategoryDetailPage />} />
-                        <Route path="code" element={<pages.CodePage />} />
+                        <Route path="homework" element={<pages.HomeworkPage />} />
                         <Route path="*" element={<pages.NotFoundPage />} />
                     </Route>
                 </Routes>

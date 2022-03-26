@@ -2,8 +2,9 @@ import * as Api from 'types/api';
 
 export interface RootState {
     todos: TodosState;
+    categories: CategoriesState;
+    page: PageState;
 }
-
 export interface TodosState {
     loading: boolean;
     list: Api.TodoItem[];
@@ -21,4 +22,9 @@ export interface PageState {
         text: string;
         active: boolean;
     };
+}
+
+export interface action {
+    type: string;
+    payload: any;
 }

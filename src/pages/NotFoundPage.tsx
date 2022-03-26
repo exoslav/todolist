@@ -8,7 +8,7 @@ const pageTitle = '404 Page Not Found';
 
 const NotFoundPage: React.FC = () => {
     const { dispatch } = useContext(StoreContext);
-    useEffect(() => changePageTitle(dispatch, { title: pageTitle, active: true }), [])
+    useEffect(() => changePageTitle(dispatch, { text: pageTitle, active: true }), [])
 
     return (
         <Paragraph>

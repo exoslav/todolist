@@ -10,13 +10,13 @@ const StyledContainer = styled.div<{ wide: boolean }>`
     margin: 50px auto 70px;
     background: ${colors.base.white};
     border-radius: 15px;
-    padding: 60px 30px 60px 60px;
+    padding: 60px 30px 40px 60px;
     box-shadow: 3px 2px 0px 0px ${colors.app.primaryBlack};
 `;
 
 const Container: React.FC = ({ children }) => {
     const location = useLocation();
-    const wide = location.pathname === '/code';
+    const wide = location.pathname === '/homework';
 
     return (
         <StyledContainer wide={wide}>

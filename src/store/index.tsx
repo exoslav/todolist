@@ -27,8 +27,8 @@ const initalStore = {
     page: pageInitialStore
 };
 
-export const StoreContext = createContext(
-    { state: initalStore, dispatch: () => {} } as { state: state.RootState; dispatch: React.Dispatch<any>}
+export const StoreContext = createContext<{ state: state.RootState; dispatch: React.Dispatch<any> }>(
+    { state: initalStore, dispatch: () => {} }
 );
 
 export const StoreProvider = ({ children }) => {

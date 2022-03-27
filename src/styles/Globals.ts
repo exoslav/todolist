@@ -7,6 +7,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     body {
+        margin-top: 50px;
         padding: 0 20px;
         font-family: 'Nunito', sans-serif;
         font-size: 18px;

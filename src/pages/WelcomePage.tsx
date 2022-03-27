@@ -24,7 +24,7 @@ const WelcomePage: React.FC = () => {
                 />
                 <Item
                     to='/homework'
-                    title='Code from homework'
+                    title='Homework'
                     done={false}
                 />
 
@@ -33,7 +33,7 @@ const WelcomePage: React.FC = () => {
 
                 <Paragraph>
                     Hello guys,<br />
-                    above you can find two links. <Bold color={colors.app.primaryRed}>The first one</Bold> is pointing to simple todo app.
+                    above you can find two links. <Bold color={colors.app.primaryRed}>The first link</Bold> is pointing to simple todo app.
                 </Paragraph>
 
                 <Paragraph>
@@ -55,10 +55,6 @@ const WelcomePage: React.FC = () => {
 
                 <Paragraph>
                     App should not do any unnecessary re-renders. You can checkc by going to "/board" page and check/uncheck todo item and observe the console. Only item currently checked should be re-rendered.
-                </Paragraph>
-
-                <Paragraph>
-                    If you have troubles installing the app, try to use <Bold>node 16.4.1</Bold>. I am also not sure how app works on windows as I am using Mac.
                 </Paragraph>
 
                 <Paragraph>

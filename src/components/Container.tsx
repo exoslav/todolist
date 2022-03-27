@@ -7,7 +7,7 @@ import colors from 'styles/colors';
 
 const StyledContainer = styled.div<{ wide: boolean }>`
     max-width: ${props => props.wide ? '884px' : '475px'};
-    margin: 50px auto 70px;
+    margin: 0 auto 70px;
     background: ${colors.base.white};
     border-radius: 15px;
     padding: 60px 30px 40px 60px;

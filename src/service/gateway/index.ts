@@ -29,6 +29,6 @@ export const request = (opts: RequestOptions) => {
                 return res.json()
             }
 
-            return Promise.reject();
+            return Promise.reject('Error fetching data.');
         })
 }

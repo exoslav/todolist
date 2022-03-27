@@ -23,8 +23,3 @@ export interface PageState {
         active: boolean;
     };
 }
-
-export interface action {
-    type: string;
-    payload: any;
-}

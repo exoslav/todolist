@@ -16,7 +16,7 @@ const StyledSyntaxHighlighter = styled(SyntaxHighlighter)`
 
 const pageTitle = 'Homework';
 
-const CodePage = () => {
+const CodePage: React.FC = () => {
     const { dispatch } = useContext(StoreContext);
 
     useEffect(() => changePageTitle(dispatch, { text: pageTitle, active: true }), []);

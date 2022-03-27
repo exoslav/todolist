@@ -1,9 +1,6 @@
-import React from 'react';
-
 import * as state from 'types/state';
-import {
-    getTodoList as fetchTodoList
-} from 'service/routes/list';
+import * as todosTypes from 'types/reducers/todos';
+import { getTodoList as fetchTodoList } from 'service/routes/list';
 
 export const initialStore = {
     list: [],
@@ -11,31 +8,31 @@ export const initialStore = {
     error: ''
 };
 
-const TODO_LIST_FETCH_START = 'todos/TODO_LIST_FETCH_START';
-const TODO_LIST_FETCH = 'todos/TODO_LIST_FETCH';
-const TODO_LIST_FETCH_ERROR = 'todos/TODO_LIST_FETCH_ERROR';
+export const TODO_LIST_FETCH_START = 'todos/TODO_LIST_FETCH_START';
+export const TODO_LIST_FETCH = 'todos/TODO_LIST_FETCH';
+export const TODO_LIST_FETCH_ERROR = 'todos/TODO_LIST_FETCH_ERROR';
 
-export const getTodoList = async (dispatch: React.Dispatch<any>) => {
+export const getTodoList: todosTypes.getTodoListAction = async (dispatch) => {
     dispatch({ type: TODO_LIST_FETCH_START });
 
     try {
         const data = await fetchTodoList();
         dispatch({ type: TODO_LIST_FETCH, payload: data });
     } catch (err) {
-        console.log('Error')
-        dispatch({ type: TODO_LIST_FETCH_ERROR, payload: err });
+        const error: string = err as string;
+        dispatch({ type: TODO_LIST_FETCH_ERROR, payload: error });
     }
 }
 
-const TODO_ITEM_CHECKED = 'todos/TODO_ITEM_CHECKED';
+export const TODO_ITEM_CHECKED = 'todos/TODO_ITEM_CHECKED';
 
-export const todoItemChecked = (dispatch: React.Dispatch<any>, id: string) => {
+export const todoItemChecked: todosTypes.todoItemCheckedAction = (dispatch, id) => {
     if (!id) return;
 
     dispatch({ type: TODO_ITEM_CHECKED, payload: id });
 }
 
-export const todosReducer = (state: state.TodosState, action: state.action): state.TodosState => {
+export const todosReducer = (state: state.TodosState, action: todosTypes.TodosActions): state.TodosState => {
     switch(action.type) {
         case TODO_LIST_FETCH_START:
             return {

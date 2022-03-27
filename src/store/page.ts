@@ -1,6 +1,5 @@
-import React from 'react';
-
 import * as state from 'types/state';
+import * as pageTypes from 'types/reducers/page';
 
 export const initialStore = {
     title: {
@@ -9,13 +8,13 @@ export const initialStore = {
     }
 };
 
-const TITLE_CHANGED = 'todos/TITLE_CHANGED';
+export const TITLE_CHANGED = 'todos/TITLE_CHANGED';
 
-export const changePageTitle = (dispatch: React.Dispatch<any>, opts: {[key: string]: string | boolean }) => {
+export const changePageTitle: pageTypes.changePageTitleAction = (dispatch, opts) => {
     dispatch({ type: TITLE_CHANGED, payload: opts });
 }
 
-export const pageReducer = (state: state.PageState, action: state.action): state.PageState => {
+export const pageReducer = (state: state.PageState, action: pageTypes.PageActions): state.PageState => {
     switch(action.type) {
         case TITLE_CHANGED:
             return {

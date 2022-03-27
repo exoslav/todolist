@@ -1,3 +1,4 @@
+/* eslint-disable */
 // @ts-nocheck
 // not used anywhere, but wwhen updating db, data wewre overwritten, needed some backup...
 
